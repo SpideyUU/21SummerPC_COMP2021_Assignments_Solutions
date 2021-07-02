@@ -1,26 +1,35 @@
-import math
-def isPrime(n):
-    if n < 2:
-        return False
-    for i in range(2, int((n/2) + 1), 1):
-        if n % i == 0:
-            return False
-    return True
 def reverse(number):
-    reverse = 0
+    rev = 0
     while number != 0:
-        reverse *= 10
-        reverse += number % 10
-        number /= 10
-    return reverse
-def isPalindrome(number):
-    return number == reverse(number)
+        lastDigit = number % 10
+        number //= 10
+        rev = (rev * 10) + lastDigit
+    return rev
+
+
+def isPrime(n):
+    div = 2
+    while div <= n / 2:
+        if n % div == 0:
+            return False
+        div += 1
+    return True
+
+
+def isPalindrome(num):
+    return True if (reverse(num) == num) else False
+
+
 def main():
     count = 0
-    for i in range(0, 100, 1):
-        if isPrime(i) and isPalindrome(i):
-            print("%10d", i)
+    numToCheck = 1
+    while count < 100:
+        numToCheck += 1
+        if isPrime(numToCheck) and isPalindrome(numToCheck):
+            print('{:>5d} '.format(numToCheck), end='')
+            if (count + 1) % 10 == 0:
+                print()
             count += 1
-            if count % 10 == 0 and i != 0:
-                print("")
+
+
 main()
